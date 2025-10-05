@@ -1,23 +1,156 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>My Site</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ComputerBased</title>
   <style>
-    /* center the message on the page */
-    html, body { height: 100%; margin: 0; }
     body {
+      margin: 0;
+      height: 100vh;
       display: flex;
-      align-items: center;
       justify-content: center;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: #ffffff;
+      align-items: center;
+      flex-direction: column;
+      background: #0d0d0d;
+      font-family: Arial, sans-serif;
+      color: white;
     }
-    .message { font-size: 2rem; }
+
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 40px;
+      font-weight: bold;
+      background: linear-gradient(90deg, #00aaff, #ff0033);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 15px rgba(0,170,255,0.8), 0 0 25px rgba(255,0,51,0.6);
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00aaff, 0 0 20px #ff0033; }
+      to   { text-shadow: 0 0 20px #ff0033, 0 0 40px #00aaff; }
+    }
+
+    .btn {
+      display: block;
+      margin: 15px;
+      padding: 15px 40px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+      background: #111;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(0, 170, 255, 0.6);
+    }
+
+    .btn:hover {
+      background: #00aaff;
+      box-shadow: 0 0 20px #00aaff, 0 0 40px #00aaff;
+    }
+
+    .menu {
+      position: fixed;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15,15,15,0.95);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      transition: top 0.7s ease;
+      z-index: 999;
+    }
+
+    .menu.active {
+      top: 0;
+    }
+
+    .menu h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #00aaff;
+      text-shadow: 0 0 15px #00aaff;
+    }
+
+    .menu p {
+      max-width: 600px;
+      text-align: center;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      padding: 0 20px;
+    }
+
+    .file-box {
+      margin-top: 20px;
+      background: #111;
+      padding: 15px 25px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 10px rgba(0, 170, 255, 0.6);
+    }
+
+    .file-name {
+      font-size: 1.1rem;
+      color: #fff;
+    }
   </style>
 </head>
 <body>
-  <div class="message">this is my site</div>
+  <h1>ComputerBased</h1>
+  <button class="btn" onclick="openMenu('about')">About ComputerBased</button>
+  <button class="btn" onclick="openMenu('softwares')">Softwares</button>
+  <button class="btn" onclick="openMenu('contact')">Contact Us</button>
+
+  <div id="popupMenu" class="menu">
+    <h2 id="menuTitle"></h2>
+    <p id="menuContent"></p>
+    <div id="fileSection"></div>
+    <button class="btn" onclick="closeMenu()">Close</button>
+  </div>
+
+  <script>
+    function openMenu(type) {
+      let title = "";
+      let content = "";
+      let fileSection = "";
+
+      if (type === "about") {
+        title = "About ComputerBased";
+        content = "Welcome to <strong>ComputerBased</strong>!<br><br>We are all about tech tutorials, software setups, tips & tricks, and helping you learn technology in a simple and powerful way.";
+      } 
+      else if (type === "softwares") {
+        title = "Softwares";
+        content = "Available software:";
+        fileSection = `
+          <div class="file-box">
+            <span class="file-name">ComputerBased Starting Program</span>
+            <a href="https://download1500.mediafire.com/5yps881e755gSx3vpzjEPpVOe_XfTWGpeKNh359Cxnl85k97DEZcTApFE57qOlFcn2-eAgLUdOyDR2vL5q4SGF7vaeTi6RiTT1DhvRXXcw_ZrqfCaLskxS-PBqChcmWpni8BaraRqDGCri2RXnb_0DuqNrKX9lyKWxpqVWnzGaWS-Q/5wr9y7by26fqj8k/ComputerBased+Starting+Program.rar" target="_blank">
+              <button class="btn">Download</button>
+            </a>
+          </div>`;
+      } 
+      else if (type === "contact") {
+        title = "Contact Us";
+        content = "Contact information will come soon.";
+      }
+
+      document.getElementById("menuTitle").innerHTML = title;
+      document.getElementById("menuContent").innerHTML = content;
+      document.getElementById("fileSection").innerHTML = fileSection;
+      document.getElementById("popupMenu").classList.add("active");
+    }
+
+    function closeMenu() {
+      document.getElementById("popupMenu").classList.remove("active");
+    }
+  </script>
 </body>
 </html>
