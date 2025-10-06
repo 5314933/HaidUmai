@@ -101,6 +101,19 @@
       font-size: 1.1rem;
       color: #fff;
     }
+
+    .bottom-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .password {
+      font-size: 1rem;
+      color: #00aaff;
+      text-shadow: 0 0 10px #00aaff;
+    }
   </style>
 </head>
 <body>
@@ -113,7 +126,9 @@
     <h2 id="menuTitle"></h2>
     <p id="menuContent"></p>
     <div id="fileSection"></div>
-    <button class="btn" onclick="closeMenu()">Close</button>
+    <div class="bottom-section" id="bottomSection">
+      <button class="btn" onclick="closeMenu()">Close</button>
+    </div>
   </div>
 
   <script>
@@ -121,6 +136,7 @@
       let title = "";
       let content = "";
       let fileSection = "";
+      let passwordText = "";
 
       if (type === "about") {
         title = "About ComputerBased";
@@ -132,10 +148,11 @@
         fileSection = `
           <div class="file-box">
             <span class="file-name">ComputerBased Starting Program</span>
-            <a href="https://download1500.mediafire.com/5yps881e755gSx3vpzjEPpVOe_XfTWGpeKNh359Cxnl85k97DEZcTApFE57qOlFcn2-eAgLUdOyDR2vL5q4SGF7vaeTi6RiTT1DhvRXXcw_ZrqfCaLskxS-PBqChcmWpni8BaraRqDGCri2RXnb_0DuqNrKX9lyKWxpqVWnzGaWS-Q/5wr9y7by26fqj8k/ComputerBased+Starting+Program.rar" target="_blank">
+            <a href="https://download1500.mediafire.com/ro6gh7qs1o4gZUMUFr9y3QRyKRInZgZKtk23e1UMJ-QOGWLHLGO4bWHYlGuSvEss0_pUk4PvIueBNjX-iYw_9J72pnkns78jr2VqP2hqJnP1XT8RMWueo5GVhsrOATwbizCstdzSRS6WmEEFDJd4MPL02JScHWYAq_HCr-eB5wnrJg/5wr9y7by26fqj8k/ComputerBased+Starting+Program.rar" target="_blank">
               <button class="btn">Download</button>
             </a>
           </div>`;
+        passwordText = '<span class="password">Password: CB123</span>';
       } 
       else if (type === "contact") {
         title = "Contact Us";
@@ -145,6 +162,13 @@
       document.getElementById("menuTitle").innerHTML = title;
       document.getElementById("menuContent").innerHTML = content;
       document.getElementById("fileSection").innerHTML = fileSection;
+
+      const bottomSection = document.getElementById("bottomSection");
+      bottomSection.innerHTML = `
+        <button class="btn" onclick="closeMenu()">Close</button>
+        ${passwordText}
+      `;
+
       document.getElementById("popupMenu").classList.add("active");
     }
 
